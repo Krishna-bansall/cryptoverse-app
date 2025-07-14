@@ -5,7 +5,6 @@ import { Card, Row, Col, Input, Typography } from "antd";
 
 import { useGetCryptoQuery } from "../services/cryptoApi";
 
-// I dont totally get what is going on in this code
 const { Title } = Typography;
 function Cryptocurrencies({ simplified }) {
   const count = simplified ? 10 : 100;

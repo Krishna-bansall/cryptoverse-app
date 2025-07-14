@@ -14,13 +14,17 @@ function News({ simplified }) {
 
   const { data } = useGetCryptoQuery(100);
 
-  const { data: cryptoNews, isFetching } = useGetCryptoNewsQuery({
+  const { data: cryptoNews, isFetching, error } = useGetCryptoNewsQuery({
     newsCategory: selectValue,
     count: simplified ? 6 : 20,
   });
 
   // console.log(cryptoNews);
   if (isFetching) return <div>Loading..</div>;
+  
+  if (error) return <div>Error loading news...</div>;
+  
+  if (!cryptoNews?.value) return <div>No news available...</div>;
 
   return (
     <>
@@ -45,7 +49,7 @@ function News({ simplified }) {
               >
                 <Option value="Cryptocurrencies">Cryptocurrencies</Option>
                 {data?.data?.coins.map((coin) => (
-                  <Option value={coin.name}>{coin.name} </Option>
+                  <Option key={coin.uuid} value={coin.name}>{coin.name} </Option>
                 ))}
               </Select>
             </Col>
@@ -77,7 +81,7 @@ function News({ simplified }) {
               title={
                 <div className="provider-container">
                   <Text>
-                    {moment(news.datePublished).startOf("ss").fromNow()}
+                    {moment(news.datePublished).fromNow()}
                   </Text>
                 </div>
               }

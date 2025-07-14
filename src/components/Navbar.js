@@ -6,7 +6,6 @@ import icon from "../images/cryptocurrency.png";
 
 import {
   HomeOutlined,
-  MoneyCollectOutlined,
   BulbOutlined,
   FundOutlined,
   MenuOutlined,
